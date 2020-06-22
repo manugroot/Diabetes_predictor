@@ -7,12 +7,20 @@ dataset = pd.read_csv('diabetes.csv')
 X = dataset.iloc[:,:-1].values
 Y = dataset.iloc[:,-1].values
 
-from xgboost import XGBClassifier
-clf = XGBClassifier()
+#from xgboost import XGBClassifier
+#clf = XGBClassifier()
+#clf.fit(X,Y)
+
+from sklearn.ensemble import RandomForestClassifier
+clf = RandomForestClassifier(n_estimators=100,random_state=0)
 clf.fit(X,Y)
 
 y_pred = clf.predict(X)
 from sklearn.metrics import accuracy_score
 print(accuracy_score(y_pred,Y))
+
+
+
+
 
 pickle.dump(clf, open('model.pkl','wb'))
